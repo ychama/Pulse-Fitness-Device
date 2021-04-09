@@ -163,11 +163,11 @@ const themeColors = {
       },
     },
   },
-  vidkids: {
+  pulse: {
     palette: {
       type: "light",
       primary: {
-        main: "#2C9FFA",
+        main: "#1AAAD8",
         contrastText: "#ffffff",
       },
       secondary: {

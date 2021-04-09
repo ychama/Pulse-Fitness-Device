@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import AppContext from "app/appContext";
 import API, { graphqlOperation } from "@aws-amplify/api";
-import { userByUsername } from "app/graphql";
+import { userByEmail } from "app/graphql";
 import * as subscriptions from "../../graphql/subscriptions";
 
 const AuthGuard = (props) => {
@@ -15,30 +15,17 @@ const AuthGuard = (props) => {
     let currentUserInfo = JSON.parse(localStorage.getItem("currentUserInfo"));
     if (currentUserInfo) {
       API.graphql(
-        graphqlOperation(userByUsername, {
-          username: currentUserInfo.attributes.email,
+        graphqlOperation(userByEmail, {
+          email: currentUserInfo.attributes.email,
         })
       )
         .then((resp) => {
-          if (resp.data.userByUsername.items.length > 0) {
-            const userData = resp.data.userByUsername.items[0];
+          if (resp.data.userByEmail.items.length > 0) {
+            const userData = resp.data.userByEmail.items[0];
+            console.log(userData);
             setUser({
               ...currentUserInfo,
               ...userData,
-            });
-            API.graphql(
-              graphqlOperation(subscriptions.onUpdateUser, {
-                id: userData.id,
-              })
-            ).subscribe({
-              next: (event) => {
-                if (event.value.data.onUpdateUser.id === userData.id) {
-                  setUser({
-                    ...currentUserInfo,
-                    ...event.value.data.onUpdateUser,
-                  });
-                }
-              },
             });
           }
         })
@@ -61,11 +48,11 @@ const AuthGuard = (props) => {
     const matched = routes.find((r) => r.path === pathname);
     setAuthenticated(true);
 
-    if (matched && matched.auth && matched.auth.length) {
-      if (!matched.auth.includes(userRole?.attributes["custom:role"])) {
-        history.push("/session/404");
-      }
-    }
+    // if (matched && matched.auth && matched.auth.length) {
+    //   if (!matched.auth.includes(userRole?.attributes["custom:role"])) {
+    //     history.push("/session/404");
+    //   }
+    // }
   }, [routes]);
 
   return authenticated ? <>{children}</> : null;

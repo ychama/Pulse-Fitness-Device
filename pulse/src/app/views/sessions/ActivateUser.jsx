@@ -1,41 +1,39 @@
 import React, { useState } from "react";
-import { Card, Grid, Button, makeStyles, TextField } from "@material-ui/core";
-import { withRouter } from "react-router-dom";
+import {
+  Card,
+  Grid,
+  Button,
+  makeStyles,
+  TextField,
+  InputLabel,
+  FormControl,
+  Select,
+  MenuItem,
+} from "@material-ui/core";
 import TextButton from "../shared/TextButton";
-import { resetPassword } from "../../redux/actions/LoginActions";
+import { Auth } from "aws-amplify";
+import { ContactSupportTwoTone } from "@material-ui/icons";
 
-const useStyles = makeStyles({
-  wrapper: {
-    position: "relative",
-  },
-
-  buttonProgress: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    marginTop: -12,
-    marginLeft: -12,
-  },
-});
-
-const ForgotPassword = (props) => {
-  const classes = useStyles();
+const ActivateUser = (props) => {
   const { history } = props;
+  const username = props.location.state.email;
+  const [activationCode, setActivationCode] = useState("");
+  const [activationCodeErrorMessage, setActivationCodeErrorMessage] = useState(
+    ""
+  );
+  console.log(username);
 
-  let inputEmail = "";
-  try {
-    inputEmail = props.location.state.email;
-  } catch (e) {}
-
-  const [email, setEmail] = useState(inputEmail);
-  const [emailErrorMessage, setEmailErrorMessage] = useState("");
-
-  const clearErrors = () => {
-    setEmailErrorMessage("");
-  };
-
-  const handleResetPassword = async () => {
-    resetPassword({ email });
+  const handleActivate = () => {
+    Auth.confirmSignUp(username, activationCode)
+      .then(() => {
+        history.push();
+        console.log("successful singup for user ");
+        history.push("/session/signIn");
+      })
+      .catch((e) => {
+        setActivationCodeErrorMessage("Invalid Activation Code");
+        console.log("error on singup.", e);
+      });
   };
 
   return (
@@ -68,28 +66,28 @@ const ForgotPassword = (props) => {
                   <Grid item xs={12}>
                     <TextField
                       variant="outlined"
-                      label="Email"
+                      label="Activation Code"
                       onChange={(event) => {
-                        setEmail(event.target.value);
-                        clearErrors();
+                        setActivationCode(event.target.value);
+                        setActivationCodeErrorMessage("");
                       }}
-                      value={email}
+                      value={activationCode}
                       fullWidth
                       type="text"
-                      name="email"
-                      error={emailErrorMessage !== ""}
-                      helperText={emailErrorMessage}
+                      name="activate"
+                      error={activationCodeErrorMessage !== ""}
+                      helperText={activationCodeErrorMessage}
                     />
                   </Grid>
                   <Grid item xs={12} style={{ display: "flex" }}>
                     <TextButton onClick={history.goBack}>Back</TextButton>
                     <div style={{ flexGrow: 1 }} />
                     <Button
+                      onClick={handleActivate}
                       variant="contained"
                       color="primary"
-                      onClick={handleResetPassword}
                     >
-                      Reset Password
+                      Activate
                     </Button>
                   </Grid>
                 </Grid>
@@ -102,4 +100,4 @@ const ForgotPassword = (props) => {
   );
 };
 
-export default withRouter(ForgotPassword);
+export default ActivateUser;

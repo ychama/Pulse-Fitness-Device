@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles, Paper } from "@material-ui/core";
 import DrawerButton from "./DrawerButton";
-
+import userRoutes from "../../views/user/UserRoutes";
 import AppContext from "../../appContext";
 import authRoles, { getUserRole } from "../../auth/authRoles";
 
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     height: "100vh",
     padding: "30px 0",
-    backgroundColor: "#2e9efa30",
+    backgroundColor: "#B0D9E7",
   },
   drawerList: {
     width: "100%",
@@ -34,27 +34,11 @@ const Drawer = () => {
 
   const { user } = useContext(AppContext);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     switch (getUserRole(user.type, user.staffType)) {
-  //       case authRoles.nurse:
-  //         setRoleRoutes(nurseRoutes);
-  //         break;
-  //       case authRoles.mother:
-  //         setRoleRoutes(motherRoutes);
-  //         break;
-  //       case authRoles.assistant:
-  //         setRoleRoutes(assistantRoutes);
-  //         break;
-  //       case authRoles.sa:
-  //         setRoleRoutes(adminRoutes);
-  //         break;
-  //       case authRoles.coder:
-  //         setRoleRoutes(coderRoutes);
-  //         break;
-  //     }
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (user) {
+      setRoleRoutes(userRoutes);
+    }
+  }, [user]);
 
   useEffect(() => {
     setDrawerItems(

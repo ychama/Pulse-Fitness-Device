@@ -1,21 +1,23 @@
-import SignIn from './SignIn';
-import NotFound from './NotFound';
-import ForgotPassword from './ForgotPassword';
-import ChangePassword from './ChangePassword';
+import SignIn from "./SignIn";
+import NotFound from "./NotFound";
+import ForgotPassword from "./ForgotPassword";
+import ChangePassword from "./ChangePassword";
+import Register from "./Register";
+import ActivateUser from "./ActivateUser";
 
 const settings = {
-  activeLayout: 'layout1',
+  activeLayout: "layout1",
   layout1Settings: {
     topbar: {
       show: false,
     },
     leftSidebar: {
       show: false,
-      mode: 'close',
+      mode: "close",
     },
   },
   layout2Settings: {
-    mode: 'full',
+    mode: "full",
     topbar: {
       show: false,
     },
@@ -27,28 +29,40 @@ const settings = {
 
 const sessionRoutes = [
   {
-    path: '/session/signin',
+    path: "/session/signin",
     component: SignIn,
     settings,
-    name: 'Sign In',
+    name: "Sign In",
   },
   {
-    path: '/session/forgot-password',
+    path: "/session/register",
+    component: Register,
+    settings,
+    name: "Register",
+  },
+  {
+    path: "/session/forgot-password",
     component: ForgotPassword,
     settings,
-    name: 'Forgot Password',
+    name: "Forgot Password",
   },
   {
-    path: '/session/404',
+    path: "/session/404",
     component: NotFound,
     settings,
-    name: 'Page Not Found',
+    name: "Page Not Found",
   },
   {
-    path: '/session/change-password',
+    path: "/session/change-password",
     component: ChangePassword,
     settings,
-    name: 'Change Password',
+    name: "Change Password",
+  },
+  {
+    path: "/session/activate",
+    component: ActivateUser,
+    settings,
+    name: "Activation",
   },
 ];
 

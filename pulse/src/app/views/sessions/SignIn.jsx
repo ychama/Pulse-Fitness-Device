@@ -24,41 +24,21 @@ const SignIn = (props) => {
 
   const redirect = () => {
     const currentUserInfo = JSON.parse(localStorage.getItem("currentUserInfo"));
-    const role = currentUserInfo.attributes["custom:role"];
-    if (currentUserInfo.attributes["custom:temporaryPassword"] !== undefined) {
-      history.push("/session/change-password");
-      return;
-    }
     if (localStorage.getItem("lastLocation") != null) {
       const lastLocation = localStorage.getItem("lastLocation");
       localStorage.removeItem("lastLocation");
       history.push(lastLocation);
       return;
     }
-    switch (role.toUpperCase()) {
-      case authRoles.sa:
-        history.push("/admin/management_staff");
-        break;
-      case authRoles.nurse:
-        history.push("/nurse/management_mothers");
-        break;
-      case authRoles.assistant:
-        history.push("/assistant/profile");
-        break;
-      case authRoles.mother:
-        history.push("/mother/meetings");
-        break;
-      case authRoles.coder:
-        history.push("/coder/dashboard");
-        break;
-      default:
-        history.push("/session/404");
-        break;
-    }
+    history.push("/dashboard");
   };
 
   const handleForgotPassword = async () => {
     history.push("/session/forgot-password", { email });
+  };
+
+  const handleRegister = async () => {
+    history.push("/session/register");
   };
 
   const handleSignin = () => {
@@ -77,6 +57,7 @@ const SignIn = (props) => {
                 "currentUserInfo",
                 JSON.stringify(currentUserInfo)
               );
+              console.log(currentUserInfo);
               redirect();
             } else {
               console.error("--------> received null user!");
@@ -84,9 +65,14 @@ const SignIn = (props) => {
           });
         })
         .catch((error) => {
-          console.log("error on login", error);
-          setEmailErrorMessage("Incorrect email or password");
-          setPasswordErrorMessage("Incorrect email or password");
+          //console.log("error on login", error);
+          if ((error.code = "UserNotConfirmedException")) {
+            console.log("user not found");
+            history.push("/session/activate", { email });
+          } else {
+            setEmailErrorMessage("Incorrect email or password");
+            setPasswordErrorMessage("Incorrect email or password");
+          }
         });
     }
   };
@@ -167,15 +153,21 @@ const SignIn = (props) => {
                       }}
                     />
                   </Grid>
-                  <Grid item xs={12} style={{ display: "flex" }}>
-                    <div style={{ flexGrow: 1 }} />
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleSignin}
-                    >
-                      Sign In
-                    </Button>
+                  <Grid container item spacing={1}>
+                    <Grid item xs>
+                      <div style={{ flexGrow: 1 }} />
+                      <TextButton onClick={handleRegister}>Register</TextButton>
+                    </Grid>
+                    <Grid item xs={6} style={{ display: "flex" }}>
+                      <div style={{ flexGrow: 1 }} />
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSignin}
+                      >
+                        Sign In
+                      </Button>
+                    </Grid>
                   </Grid>
                 </Grid>
               </div>

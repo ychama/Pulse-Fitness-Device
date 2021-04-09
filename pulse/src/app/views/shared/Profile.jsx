@@ -517,31 +517,31 @@ const PasswordCard = (props) => {
   );
 };
 
-const ParentLayout = ({ classes, user, alert }) => (
-  <>
-    <Grid
-      item
-      md={6}
-      xs={12}
-      style={{ display: "flex", justifyContent: "center" }}
-    >
-      <ProfileCard classes={classes} title="Parent" user={user} alert={alert} />
-    </Grid>
+// const ParentLayout = ({ classes, user, alert }) => (
+//   <>
+//     <Grid
+//       item
+//       md={6}
+//       xs={12}
+//       style={{ display: "flex", justifyContent: "center" }}
+//     >
+//       <ProfileCard classes={classes} title="Parent" user={user} alert={alert} />
+//     </Grid>
 
-    <Grid
-      item
-      md={6}
-      xs={12}
-      style={{ display: "flex", justifyContent: "center" }}
-    >
-      <BabyCard classes={classes} user={user} alert={alert} />
-    </Grid>
+//     <Grid
+//       item
+//       md={6}
+//       xs={12}
+//       style={{ display: "flex", justifyContent: "center" }}
+//     >
+//       <BabyCard classes={classes} user={user} alert={alert} />
+//     </Grid>
 
-    <Grid item xs={12} style={{ display: "flex", justifyContent: "center" }}>
-      <PasswordCard classes={classes} user={user} alert={alert} />
-    </Grid>
-  </>
-);
+//     <Grid item xs={12} style={{ display: "flex", justifyContent: "center" }}>
+//       <PasswordCard classes={classes} user={user} alert={alert} />
+//     </Grid>
+//   </>
+// );
 
 const NonParentLayout = ({ classes, user, alert }) => (
   <>
@@ -580,11 +580,7 @@ const Profile = () => {
 
   const Content = (props) => (
     <>
-      {user.type === "STAFF" ? (
-        <NonParentLayout classes={classes} user={user} alert={props.alert} />
-      ) : (
-        <ParentLayout classes={classes} user={user} alert={props.alert} />
-      )}
+      <ParentLayout classes={classes} user={user} alert={props.alert} />
     </>
   );
 

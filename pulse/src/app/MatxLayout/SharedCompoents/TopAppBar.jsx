@@ -19,6 +19,7 @@ import AvatarClickable from "./AvatarClickable";
 import defaultImage from "./image/default.png";
 import "./style.css";
 import authRoles, { getUserRole } from "../../auth/authRoles";
+import userRoutes from "../../views/user/UserRoutes";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -54,6 +55,7 @@ const TopAppBar = (props) => {
 
   const getUrlPathName = () => new URL(document.location.href).pathname;
   const { user, setUser, refreshAuth, setRefreshAuth } = useContext(AppContext);
+  console.log("App context", AppContext);
 
   const getPageTitle = (routes) => {
     try {
@@ -69,27 +71,11 @@ const TopAppBar = (props) => {
   useEffect(() => {
     if (user) {
       let roleRoutes = [];
-      switch (getUserRole(user.type, user.staffType)) {
-        case authRoles.nurse:
-          // roleRoutes = nurseRoutes;
-          break;
-        case authRoles.mother:
-          // roleRoutes = motherRoutes;
-          break;
-        case authRoles.assistant:
-          // roleRoutes = assistantRoutes;
-          break;
-        case authRoles.sa:
-          // roleRoutes = adminRoutes;
-          break;
-        case authRoles.coder:
-          // roleRoutes = coderRoutes;
-          break;
-      }
-
+      roleRoutes = userRoutes;
       setHomeRoute(
         roleRoutes.filter((item) => item.hasOwnProperty("home"))[0].path
       );
+
       setProfileRoute(
         roleRoutes.filter((item) => item.name === "Profile")[0].path
       );
@@ -99,14 +85,12 @@ const TopAppBar = (props) => {
   const homeButtonHandler = () => {
     history.push(homeRoute);
   };
-
   const handleSignOut = () => {
     localStorage.removeItem("currentUserInfo");
     setUser(null);
     setRefreshAuth(!refreshAuth);
     Auth.signOut().then(() => history.push("/session/signin"));
   };
-
   useEffect(() => {
     if (user && "pic" in user && user.pic !== null) {
       Storage.get(user.pic)

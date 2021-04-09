@@ -4,8 +4,8 @@ import { Provider } from "react-redux";
 import { Router } from "react-router-dom";
 import { Store } from "./redux/Store";
 import AppContext from "./appContext";
-// import AuthGuard from "./auth/AuthGuard";
 import routes from "./RootRoutes";
+import AuthGuard from "./auth/AuthGuard";
 import MatxTheme from "./MatxLayout/MatxTheme/MatxTheme";
 import MatxLayout from "./MatxLayout/Layout";
 import history from "history.js";
@@ -20,7 +20,9 @@ const App = () => {
       <Provider store={Store}>
         <MatxTheme>
           <Router history={history}>
-            <MatxLayout />
+            <AuthGuard>
+              <MatxLayout />
+            </AuthGuard>
           </Router>
         </MatxTheme>
       </Provider>

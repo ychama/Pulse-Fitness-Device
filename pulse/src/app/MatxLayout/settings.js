@@ -16,7 +16,7 @@ const themes = createMatxThemes();
 
 const MatxLayoutSettings = {
   activeLayout: "layout1", // Check out Matx pro for more options
-  activeTheme: "vidkids", // View all valid theme colors inside MatxTheme/themeColors.js
+  activeTheme: "pulse", // View all valid theme colors inside MatxTheme/themeColors.js
   perfectScrollbar: true,
 
   themes,
@@ -25,13 +25,13 @@ const MatxLayoutSettings = {
   secondarySidebar: {
     // Check out Matx pro for secondary sidebar
     show: true,
-    theme: "vidkids", // View all valid theme colors inside MatxTheme/themeColors.js
+    theme: "pulse", // View all valid theme colors inside MatxTheme/themeColors.js
   },
   // Footer options
   footer: {
     show: true,
     fixed: false,
-    theme: "vidkids", // View all valid theme colors inside MatxTheme/themeColors.js
+    theme: "pulse", // View all valid theme colors inside MatxTheme/themeColors.js
   },
 };
 

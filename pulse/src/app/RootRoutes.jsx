@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import sessionRoutes from "./views/sessions/SessionRoutes";
+import userRoutes from "./views/user/UserRoutes";
+import { Auth } from "aws-amplify";
 
 function RedirectComponent() {
   const [authenticated, setAuthenticated] = useState(false);
-
-  return <Redirect to="/session/signin" />;
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then(() => {
+        setAuthenticated(true);
+      })
+      .catch(() => setAuthenticated(false));
+  }, []);
+  return authenticated ? (
+    <Redirect to="/" />
+  ) : (
+    <Redirect to="/session/signin" />
+  );
 }
 
 const redirectRoute = [
@@ -22,6 +34,11 @@ const errorRoute = [
   },
 ];
 
-const routes = [...sessionRoutes, ...redirectRoute, ...errorRoute];
+const routes = [
+  ...sessionRoutes,
+  ...userRoutes,
+  ...redirectRoute,
+  ...errorRoute,
+];
 
 export default routes;

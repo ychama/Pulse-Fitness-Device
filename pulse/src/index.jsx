@@ -6,7 +6,10 @@ import ReactDOM from "react-dom";
 import "./_index.scss";
 import * as serviceWorker from "./serviceWorker";
 import App from "./app/App";
+import Amplify from "@aws-amplify/core";
+import awsExports from "aws-exports";
 
+Amplify.configure(awsExports);
 ReactDOM.render(<App />, document.getElementById("root"));
 
 // for IE-11 support un-comment cssVars() and it's import in this file
