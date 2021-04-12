@@ -98,10 +98,18 @@ const getUserInfo = gql`
     userByEmail(email: $email) {
       items {
         id
-        createdAt
         analytics {
           items {
-            analyticID
+            date_recorded
+            stepCount {
+              step_count
+            }
+            heartRate {
+              heart_rate
+            }
+            bloodOxygen {
+              blood_oxygen
+            }
           }
         }
       }

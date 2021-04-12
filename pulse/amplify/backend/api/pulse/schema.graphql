@@ -18,6 +18,7 @@ enum Sex {
 }
 
 type Analytics @model @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
   userID: ID!
   date_recorded: AWSDateTime!
   stepCountID: ID!
@@ -48,6 +49,6 @@ type BloodOxygen @model {
 
 enum AnalyicsStatus {
   NORMAL
-  AVERAGE
+  HIGH
   SEVERE
 }

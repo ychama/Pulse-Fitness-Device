@@ -5,6 +5,7 @@ import classnames from "classnames";
 import AppContext from "../../appContext";
 import { makeStyles, Grid, Container } from "@material-ui/core";
 import * as mutations from "../../../graphql/mutations";
+import Button from "@material-ui/core/Button";
 import {
   getUserInfo,
   createNewStepCount,
@@ -13,6 +14,7 @@ import {
   createNewAnalytics,
 } from "../../graphql.js";
 import moment from "moment";
+import Graphs from "./Graphs";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
   gridRowOne: {
     flex: "0 0 150px",
-    maxHeight: 150,
+    maxHeight: 100,
   },
   gridRowTwo: {
     flex: "1",
@@ -50,9 +52,7 @@ const Dashboard = () => {
   const [isDisconnected, setIsDisconnected] = useState(true);
   const [heartRate, setHeartRate] = useState(null);
   const [dataRead, setDataRead] = useState([]);
-  // const [heartRateID, setHeartRateID] = useState(null);
-  // const [bloodOxygenID, setBloodOxygenID] = useState(null);
-  // const [stepsID, setStepsID] = useState(null);
+  const [analyticsData, setAnalyticsData] = useState([]);
 
   const readings = [];
   const prevReadingsLen = readings.length;
@@ -72,10 +72,36 @@ const Dashboard = () => {
   }, [user]);
 
   const getUser = async (email) => {
-    API.graphql(graphqlOperation(getUserInfo, { email: email })).then((res) => {
-      //Latest Analytics
-      console.log(res);
-    });
+    API.graphql(graphqlOperation(getUserInfo, { email: email }))
+      .then((res) => {
+        let dat = res.data["userByEmail"].items[0].analytics["items"];
+        const analytics = {
+          data: {
+            heartRate: "",
+            oxygenLevel: "",
+            steps: "",
+            date_recorded: "",
+          },
+        };
+
+        const tableRows = [];
+
+        dat.map((data, key) => {
+          console.log(data);
+          analytics.data = {
+            heartRate: data.heartRate["heart_rate"],
+            oxygenLevel: data.bloodOxygen["blood_oxygen"],
+            steps: data.stepCount["step_count"],
+            date_recorded: data.date_recorded,
+          };
+          tableRows.push(analytics);
+        });
+
+        setAnalyticsData(tableRows);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -94,7 +120,6 @@ const Dashboard = () => {
         var bloodOxygen = element.oL;
         var steps = element.st;
         var date = element.dt;
-        console.log(date);
 
         const createHeartRate = {
           heart_rate: String(heartRate),
@@ -108,9 +133,7 @@ const Dashboard = () => {
           step_count: String(steps),
           metrics: "NORMAL",
         };
-        console.log(createHeartRate);
-        console.log(createBloodOxygen);
-        console.log(createStepCount);
+
         const heartRateResponse = await API.graphql({
           query: mutations.createHeartRate,
           variables: { input: createHeartRate },
@@ -123,10 +146,6 @@ const Dashboard = () => {
           query: mutations.createStepCount,
           variables: { input: createStepCount },
         });
-
-        console.log(bloodOxygenResponse.data.createBloodOxygen["id"]);
-        console.log(heartRateResponse.data.createHeartRate["id"]);
-        console.log(stepsResponse.data.createStepCount["id"]);
 
         const stepID = stepsResponse.data.createStepCount["id"];
         const hrID = heartRateResponse.data.createHeartRate["id"];
@@ -249,17 +268,30 @@ const Dashboard = () => {
             className={classnames(classes.gridCell, classes.gridRowOne)}
           >
             <PulseMainLogo width={200} />
-            {supportsBluetooth && !isDisconnected && (
-              <p>HeartRate: {heartRate}</p>
-            )}
+          </Grid>
+          <Grid
+            item
+            container
+            justify="center"
+            alignItems="center"
+            xs={1}
+            className={classnames(classes.gridCell, classes.gridRowOne)}
+          >
             {supportsBluetooth && isDisconnected && (
-              <button onClick={connectToDeviceAndSubscribeToUpdates}>
-                Connect to a Bluetooth device
-              </button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={connectToDeviceAndSubscribeToUpdates}
+              >
+                Upload
+              </Button>
             )}
             {!supportsBluetooth && (
               <p>This browser doesn't support the Web Bluetooth API</p>
             )}
+          </Grid>
+          <Grid item xs={12} className={classes.gridRowTwo}>
+            <Graphs analyticsData={analyticsData} />
           </Grid>
         </Grid>
       </Container>
