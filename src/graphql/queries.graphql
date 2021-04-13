@@ -1,0 +1,304 @@
+# this is an auto generated file. This will be overwritten
+query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    email
+    first_name
+    last_name
+    DOB
+    pic
+    sex
+    height
+    pulseFitnessDevices {
+      items {
+        id
+        uid
+        name
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    analytics {
+      items {
+        id
+        analyticID
+        userID
+        pulseFitnessID
+        date_recorded
+        stepCountID
+        heartRateID
+        bloodOxygenID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      email
+      first_name
+      last_name
+      DOB
+      pic
+      sex
+      height
+      pulseFitnessDevices {
+        nextToken
+      }
+      analytics {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetPulseFitnessDevice($id: ID!) {
+  getPulseFitnessDevice(id: $id) {
+    id
+    uid
+    name
+    userID
+    analytics {
+      items {
+        id
+        analyticID
+        userID
+        pulseFitnessID
+        date_recorded
+        stepCountID
+        heartRateID
+        bloodOxygenID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListPulseFitnessDevices(
+  $filter: ModelPulseFitnessDeviceFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPulseFitnessDevices(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      uid
+      name
+      userID
+      analytics {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetAnalytics($id: ID!) {
+  getAnalytics(id: $id) {
+    id
+    analyticID
+    userID
+    pulseFitnessID
+    date_recorded
+    stepCountID
+    heartRateID
+    bloodOxygenID
+    stepCount {
+      id
+      step_count
+      metrics
+      createdAt
+      updatedAt
+    }
+    heartRate {
+      id
+      heart_rate
+      metrics
+      createdAt
+      updatedAt
+    }
+    bloodOxygen {
+      id
+      blood_oxygen
+      metrics
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListAnalyticss(
+  $filter: ModelAnalyticsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listAnalyticss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      analyticID
+      userID
+      pulseFitnessID
+      date_recorded
+      stepCountID
+      heartRateID
+      bloodOxygenID
+      stepCount {
+        id
+        step_count
+        metrics
+        createdAt
+        updatedAt
+      }
+      heartRate {
+        id
+        heart_rate
+        metrics
+        createdAt
+        updatedAt
+      }
+      bloodOxygen {
+        id
+        blood_oxygen
+        metrics
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetStepCount($id: ID!) {
+  getStepCount(id: $id) {
+    id
+    step_count
+    metrics
+    createdAt
+    updatedAt
+  }
+}
+query ListStepCounts(
+  $filter: ModelStepCountFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listStepCounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      step_count
+      metrics
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetHeartRate($id: ID!) {
+  getHeartRate(id: $id) {
+    id
+    heart_rate
+    metrics
+    createdAt
+    updatedAt
+  }
+}
+query ListHeartRates(
+  $filter: ModelHeartRateFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listHeartRates(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      heart_rate
+      metrics
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetBloodOxygen($id: ID!) {
+  getBloodOxygen(id: $id) {
+    id
+    blood_oxygen
+    metrics
+    createdAt
+    updatedAt
+  }
+}
+query ListBloodOxygens(
+  $filter: ModelBloodOxygenFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBloodOxygens(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      blood_oxygen
+      metrics
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query UserByEmail(
+  $email: String
+  $sortDirection: ModelSortDirection
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  userByEmail(
+    email: $email
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      email
+      first_name
+      last_name
+      DOB
+      pic
+      sex
+      height
+      pulseFitnessDevices {
+        nextToken
+      }
+      analytics {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}

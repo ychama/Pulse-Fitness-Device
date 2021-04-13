@@ -1,0 +1,109 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+  color: rgba(255, 0, 221, 0.863);
+  font-size: 16px;
+  // color: rgba(255, 162, 0, 0.842);
+}
+
+
+.ant-pagination.ant-table-pagination.ant-table-pagination-right{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+tr{
+  text-align: center;
+}
+
+td{
+  padding: 8px !important;
+}
+th{
+  text-align: center !important;
+}
+
+table {
+  width: 100%;
+  position: relative;
+  & > {
+    thead > tr > th {
+      border-bottom: solid 1px #e5e5e5;
+      font-size: 1em;
+      position: sticky;
+      z-index: 99;
+      background-color: white;
+      top: 0;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    tbody > tr {
+      > td {
+        border-bottom: solid 1px #eeeeee;
+        font-size: 1em;
+        height: 33px;
+        color: #555 !important;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.MuiBackdrop-root{
+  background-color: transparent !important;
+}
+
+//modal
+
+.flexible-modal {
+  position: absolute;
+  z-index: 1;
+  border: 1px solid #ccc;
+  background: white;
+}
+.flexible-modal-mask {
+  position: fixed;
+  height: 100%;
+  background: rgba(55, 55, 55, 0.6);
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}
+.flexible-modal-resizer {
+  position:absolute;
+  right:0;
+  bottom:0;
+  cursor:se-resize;
+  margin:5px;
+  border-bottom: solid 2px #333;
+  border-right: solid 2px #333;
+}
+.flexible-modal-drag-area{
+  background: rgba(22, 22, 333, 0.2);
+  height: 50px;
+  position:absolute;
+  right:0;
+  top:0;
+  cursor:move;
+}
+
+
+.ant-tabs > .ant-tabs-nav, .ant-tabs > div > .ant-tabs-nav{
+  margin: 0 !important;
+  padding-left: 9px !important;
+}

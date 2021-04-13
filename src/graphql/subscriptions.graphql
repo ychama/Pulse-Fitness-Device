@@ -1,0 +1,382 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateUser {
+  onCreateUser {
+    id
+    email
+    first_name
+    last_name
+    DOB
+    pic
+    sex
+    height
+    pulseFitnessDevices {
+      items {
+        id
+        uid
+        name
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    analytics {
+      items {
+        id
+        analyticID
+        userID
+        pulseFitnessID
+        date_recorded
+        stepCountID
+        heartRateID
+        bloodOxygenID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateUser {
+  onUpdateUser {
+    id
+    email
+    first_name
+    last_name
+    DOB
+    pic
+    sex
+    height
+    pulseFitnessDevices {
+      items {
+        id
+        uid
+        name
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    analytics {
+      items {
+        id
+        analyticID
+        userID
+        pulseFitnessID
+        date_recorded
+        stepCountID
+        heartRateID
+        bloodOxygenID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUser {
+  onDeleteUser {
+    id
+    email
+    first_name
+    last_name
+    DOB
+    pic
+    sex
+    height
+    pulseFitnessDevices {
+      items {
+        id
+        uid
+        name
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    analytics {
+      items {
+        id
+        analyticID
+        userID
+        pulseFitnessID
+        date_recorded
+        stepCountID
+        heartRateID
+        bloodOxygenID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreatePulseFitnessDevice {
+  onCreatePulseFitnessDevice {
+    id
+    uid
+    name
+    userID
+    analytics {
+      items {
+        id
+        analyticID
+        userID
+        pulseFitnessID
+        date_recorded
+        stepCountID
+        heartRateID
+        bloodOxygenID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdatePulseFitnessDevice {
+  onUpdatePulseFitnessDevice {
+    id
+    uid
+    name
+    userID
+    analytics {
+      items {
+        id
+        analyticID
+        userID
+        pulseFitnessID
+        date_recorded
+        stepCountID
+        heartRateID
+        bloodOxygenID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeletePulseFitnessDevice {
+  onDeletePulseFitnessDevice {
+    id
+    uid
+    name
+    userID
+    analytics {
+      items {
+        id
+        analyticID
+        userID
+        pulseFitnessID
+        date_recorded
+        stepCountID
+        heartRateID
+        bloodOxygenID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateAnalytics {
+  onCreateAnalytics {
+    id
+    analyticID
+    userID
+    pulseFitnessID
+    date_recorded
+    stepCountID
+    heartRateID
+    bloodOxygenID
+    stepCount {
+      id
+      step_count
+      metrics
+      createdAt
+      updatedAt
+    }
+    heartRate {
+      id
+      heart_rate
+      metrics
+      createdAt
+      updatedAt
+    }
+    bloodOxygen {
+      id
+      blood_oxygen
+      metrics
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateAnalytics {
+  onUpdateAnalytics {
+    id
+    analyticID
+    userID
+    pulseFitnessID
+    date_recorded
+    stepCountID
+    heartRateID
+    bloodOxygenID
+    stepCount {
+      id
+      step_count
+      metrics
+      createdAt
+      updatedAt
+    }
+    heartRate {
+      id
+      heart_rate
+      metrics
+      createdAt
+      updatedAt
+    }
+    bloodOxygen {
+      id
+      blood_oxygen
+      metrics
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteAnalytics {
+  onDeleteAnalytics {
+    id
+    analyticID
+    userID
+    pulseFitnessID
+    date_recorded
+    stepCountID
+    heartRateID
+    bloodOxygenID
+    stepCount {
+      id
+      step_count
+      metrics
+      createdAt
+      updatedAt
+    }
+    heartRate {
+      id
+      heart_rate
+      metrics
+      createdAt
+      updatedAt
+    }
+    bloodOxygen {
+      id
+      blood_oxygen
+      metrics
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateStepCount {
+  onCreateStepCount {
+    id
+    step_count
+    metrics
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateStepCount {
+  onUpdateStepCount {
+    id
+    step_count
+    metrics
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteStepCount {
+  onDeleteStepCount {
+    id
+    step_count
+    metrics
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateHeartRate {
+  onCreateHeartRate {
+    id
+    heart_rate
+    metrics
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateHeartRate {
+  onUpdateHeartRate {
+    id
+    heart_rate
+    metrics
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteHeartRate {
+  onDeleteHeartRate {
+    id
+    heart_rate
+    metrics
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateBloodOxygen {
+  onCreateBloodOxygen {
+    id
+    blood_oxygen
+    metrics
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateBloodOxygen {
+  onUpdateBloodOxygen {
+    id
+    blood_oxygen
+    metrics
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteBloodOxygen {
+  onDeleteBloodOxygen {
+    id
+    blood_oxygen
+    metrics
+    createdAt
+    updatedAt
+  }
+}
