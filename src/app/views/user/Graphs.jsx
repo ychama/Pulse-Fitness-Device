@@ -71,13 +71,14 @@ const Graphs = (props) => {
     setAverageBloodOxygen(bl);
     setAverageHeartRate(hr);
     setTotalStepsWalked(stepsWalked);
+    let stepList = [...stepsTaken];
     analyticsData.map((data, key) => {
-      whatWeekIsItIn(data);
+      whatWeekIsItIn(data, stepList);
     });
+    setStepsTaken(stepList);
   };
 
-  const whatWeekIsItIn = (item) => {
-    let stepList = [...stepsTaken];
+  const whatWeekIsItIn = (item, stepList) => {
     for (let i = 0; i < dates.length; i++) {
       let weekAtI = moment(dates[i]);
       let inputDate = moment(item.data.date_recorded);
@@ -87,12 +88,10 @@ const Graphs = (props) => {
       if (weekAtI.isoWeek() === inputDate.isoWeek()) {
         let temp = stepList[i];
         console.log(i);
-        stepList[i] = temp + parseInt(item.data["heartRate"], 10);
-
+        stepList[i] = temp + parseInt(item.data["steps"], 10);
         break;
       }
     }
-    setStepsTaken(stepList);
   };
 
   return (
