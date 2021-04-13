@@ -38,7 +38,7 @@ const AverageHeartRate = (props, { className, ...rest }) => {
               Average Heart Rate
             </Typography>
             <Typography color="textPrimary" variant="h3">
-              {props.averageHeartRate}
+              {Math.round(props.averageHeartRate, 1)}
             </Typography>
           </Grid>
           <Grid item>

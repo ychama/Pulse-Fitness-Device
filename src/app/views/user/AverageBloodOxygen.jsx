@@ -38,7 +38,7 @@ const AverageBloodOxygen = (props, { className, ...rest }) => {
               Average Blood Oxygen
             </Typography>
             <Typography color="textPrimary" variant="h3">
-              {props.averageBloodOxygen}%
+              {Math.round(props.averageBloodOxygen, 1)}%
             </Typography>
           </Grid>
           <Grid item>

@@ -53,6 +53,7 @@ const Dashboard = () => {
   const [heartRate, setHeartRate] = useState(null);
   const [dataRead, setDataRead] = useState([]);
   const [analyticsData, setAnalyticsData] = useState([]);
+  const [buttonEnable, setButtonEnable] = useState(false);
 
   const readings = [];
   const prevReadingsLen = readings.length;
@@ -61,6 +62,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (navigator.bluetooth) {
       setSupportsBluetooth(true);
+      setButtonEnable(true);
     }
   }, []);
 
@@ -88,15 +90,15 @@ const Dashboard = () => {
 
         dat.map((data, key) => {
           console.log(data);
-          analytics.data = {
-            heartRate: data.heartRate["heart_rate"],
-            oxygenLevel: data.bloodOxygen["blood_oxygen"],
-            steps: data.stepCount["step_count"],
-            date_recorded: data.date_recorded,
-          };
-          tableRows.push(analytics);
+          tableRows.push({
+            data: {
+              heartRate: data.heartRate["heart_rate"],
+              oxygenLevel: data.bloodOxygen["blood_oxygen"],
+              steps: data.stepCount["step_count"],
+              date_recorded: data.date_recorded,
+            },
+          });
         });
-
         setAnalyticsData(tableRows);
       })
       .catch((err) => {
@@ -166,7 +168,7 @@ const Dashboard = () => {
             },
           },
         });
-        console.log(analyticsResponse);
+        getUser();
       });
     });
   };
@@ -177,6 +179,7 @@ const Dashboard = () => {
   const onDisconnected = (event) => {
     alert(`The device ${event.target} is disconnected`);
     setIsDisconnected(true);
+    setButtonEnable(false);
   };
 
   /**
@@ -204,6 +207,7 @@ const Dashboard = () => {
       });
 
       setIsDisconnected(false);
+      setButtonEnable(false);
 
       // Add an event listener to detect when a device disconnects
       device.addEventListener("gattserverdisconnected", onDisconnected);
@@ -279,6 +283,7 @@ const Dashboard = () => {
           >
             {supportsBluetooth && isDisconnected && (
               <Button
+                disabled={!buttonEnable}
                 variant="contained"
                 color="primary"
                 onClick={connectToDeviceAndSubscribeToUpdates}

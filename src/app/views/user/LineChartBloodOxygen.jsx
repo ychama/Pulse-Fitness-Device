@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Barchart = (props, { className, ...rest }) => {
+const LineChartBloodOxygen = (props, { className, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
   const { stepsTaken, dates } = props;
@@ -47,9 +47,11 @@ const Barchart = (props, { className, ...rest }) => {
   const data = {
     datasets: [
       {
-        backgroundColor: colors.indigo[500],
+        backgroundColor: colors.orange[500],
+        //fill: false,
+        //borderColor: colors.orange[500],
         data: stepsTaken,
-        label: "Steps",
+        label: "Blood Oxygen",
       },
     ],
     labels: formatedDateArr,
@@ -112,11 +114,11 @@ const Barchart = (props, { className, ...rest }) => {
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader title="Steps Taken" />
+      <CardHeader title="Blood Oxygen" />
       <Divider />
       <CardContent>
         <Box height={400} position="relative">
-          <Bar data={data} options={options} />
+          <Line data={data} options={options} />
         </Box>
       </CardContent>
       <Divider />
@@ -124,8 +126,8 @@ const Barchart = (props, { className, ...rest }) => {
   );
 };
 
-Barchart.propTypes = {
+LineChartBloodOxygen.propTypes = {
   className: PropTypes.string,
 };
 
-export default Barchart;
+export default LineChartBloodOxygen;

@@ -16,24 +16,24 @@ const userRoutes = [
     home: true,
     sidebarIcon: <AssessmentIcon fontSize="large" />,
   },
-  {
-    path: "/connect_device",
-    name: "Connect Device",
-    component: null,
-    sidebarIcon: <BluetoothIcon fontSize="large" />,
-  },
+  // {
+  //   path: "/connect_device",
+  //   name: "Connect Device",
+  //   component: null,
+  //   sidebarIcon: <BluetoothIcon fontSize="large" />,
+  // },
   {
     path: "/profile",
     name: "Profile",
     component: null,
     sidebarIcon: <AccountCircle fontSize="large" />,
   },
-  {
-    path: "/info",
-    name: "Info",
-    component: null,
-    sidebarIcon: <InfoIcon fontSize="large" />,
-  },
+  // {
+  //   path: "/info",
+  //   name: "Info",
+  //   component: null,
+  //   sidebarIcon: <InfoIcon fontSize="large" />,
+  // },
 ];
 
 export default userRoutes;

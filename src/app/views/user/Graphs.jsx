@@ -6,6 +6,8 @@ import TotalStepsWalked from "./TotalStepsWalked";
 import AverageHeartRate from "./AverageHeartRate";
 import AverageBloodOxygen from "./AverageBloodOxygen";
 import Barchart from "./BarChart";
+import LineChartHeartRate from "./LineChartHeartRate";
+import LineChartBloodOxygen from "./LineChartBloodOxygen";
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
@@ -26,6 +28,9 @@ const Graphs = (props) => {
   const [averageBloodOxygen, setAverageBloodOxygen] = useState(0);
   const [dates, setDates] = useState([]);
   const [stepsTaken, setStepsTaken] = useState([0, 0, 0, 0, 0]);
+  const [heartRate, setHeartRate] = useState([0, 0, 0, 0, 0]);
+  // const [heartRateCounter, setHeartRateCounter] = useState([0, 0, 0, 0, 0]);
+  const [bloodOxygen, setBloodOxygen] = useState([0, 0, 0, 0, 0]);
 
   let date = new Date();
   let year = date.getFullYear();
@@ -60,35 +65,79 @@ const Graphs = (props) => {
     let stepsWalked = 0;
     let hr = 0;
     let bl = 0;
-    console.log(analyticsData);
+    let i = 0;
     analyticsData.map((data, key) => {
       stepsWalked += parseInt(data.data["steps"], 10);
       hr += parseInt(data.data["heartRate"], 10);
-      bl += parseInt(data.data["oxygenLevel"], 10);
+
+      if (parseInt(data.data["oxygenLevel"], 10) > 0) {
+        i++;
+        bl += parseInt(data.data["oxygenLevel"], 10);
+      }
     });
     hr = hr / analyticsData.length;
-    bl = bl / analyticsData.length;
+    bl = bl / i;
     setAverageBloodOxygen(bl);
     setAverageHeartRate(hr);
     setTotalStepsWalked(stepsWalked);
     let stepList = [...stepsTaken];
-    analyticsData.map((data, key) => {
-      whatWeekIsItIn(data, stepList);
+    let heartRateList = [...heartRate];
+    let bloodOxygenList = [...bloodOxygen];
+    let heartRateCounterList = [0, 0, 0, 0, 0];
+    let bloodOxygenCounterList = [0, 0, 0, 0, 0];
+    analyticsData.map(async (data, key) => {
+      await whatWeekIsItIn(
+        data,
+        stepList,
+        heartRateList,
+        bloodOxygenList,
+        bloodOxygenCounterList,
+        heartRateCounterList
+      );
     });
     setStepsTaken(stepList);
+    for (let i = 0; i < heartRateCounterList.length; i++) {
+      let count = heartRateCounterList[i];
+      if (count > 0) {
+        console.log(heartRateList[i]);
+        let avHr = Math.round(heartRateList[i] / count, 1);
+        heartRateList[i] = avHr;
+      }
+    }
+    setHeartRate(heartRateList);
+    for (let i = 0; i < bloodOxygenCounterList.length; i++) {
+      let count = bloodOxygenCounterList[i];
+      if (count > 0) {
+        let avHr = Math.round(bloodOxygenList[i] / count, 1);
+        bloodOxygenList[i] = avHr;
+      }
+    }
+    setBloodOxygen(bloodOxygenList);
   };
 
-  const whatWeekIsItIn = (item, stepList) => {
+  const whatWeekIsItIn = async (
+    item,
+    stepList,
+    heartRateList,
+    bloodOxygenList,
+    bloodOxygenCounterList,
+    heartRateCounterList
+  ) => {
     for (let i = 0; i < dates.length; i++) {
       let weekAtI = moment(dates[i]);
       let inputDate = moment(item.data.date_recorded);
-      console.log(weekAtI);
-      console.log(inputDate);
-      console.log(stepList);
       if (weekAtI.isoWeek() === inputDate.isoWeek()) {
+        heartRateCounterList[i]++;
         let temp = stepList[i];
-        console.log(i);
         stepList[i] = temp + parseInt(item.data["steps"], 10);
+        let temp1 = heartRateList[i];
+        heartRateList[i] = temp1 + parseInt(item.data["heartRate"], 10);
+        if (parseInt(item.data["oxygenLevel"], 10) > 0) {
+          bloodOxygenCounterList[i]++;
+          let temp3 = bloodOxygenList[i];
+          bloodOxygenList[i] = temp3 + parseInt(item.data["oxygenLevel"], 10);
+        }
+
         break;
       }
     }
@@ -135,6 +184,12 @@ const Graphs = (props) => {
       </Grid>
       <Grid item xs={12} className={classes.containerPadding}>
         <Barchart stepsTaken={stepsTaken} dates={dates} />
+      </Grid>
+      <Grid item xs={12} className={classes.containerPadding}>
+        <LineChartHeartRate stepsTaken={heartRate} dates={dates} />
+      </Grid>
+      <Grid item xs={12} className={classes.containerPadding}>
+        <LineChartBloodOxygen stepsTaken={bloodOxygen} dates={dates} />
       </Grid>
     </Grid>
   );
