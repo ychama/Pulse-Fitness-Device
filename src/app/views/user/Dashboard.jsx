@@ -53,7 +53,7 @@ const Dashboard = () => {
   const [heartRate, setHeartRate] = useState(null);
   const [dataRead, setDataRead] = useState([]);
   const [analyticsData, setAnalyticsData] = useState([]);
-  const [buttonEnable, setButtonEnable] = useState(false);
+  const [buttonEnable, setButtonEnable] = useState(true);
 
   const readings = [];
   const prevReadingsLen = readings.length;
@@ -62,7 +62,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (navigator.bluetooth) {
       setSupportsBluetooth(true);
-      setButtonEnable(true);
+      setButtonEnable(false);
     }
   }, []);
 
@@ -168,7 +168,7 @@ const Dashboard = () => {
             },
           },
         });
-        getUser();
+        getUser(user.email);
       });
     });
   };
@@ -207,7 +207,7 @@ const Dashboard = () => {
       });
 
       setIsDisconnected(false);
-      setButtonEnable(false);
+      setButtonEnable(true);
 
       // Add an event listener to detect when a device disconnects
       device.addEventListener("gattserverdisconnected", onDisconnected);
