@@ -38,13 +38,16 @@ The **Pulse Fitness Tracker** is inspired by commercial fitness wearables (e.g.,
 ### Product Images
 
 - **Front View**  
-  <img src="./media/pulse_front.png" alt="Pulse Fitness Tracker Front View" width="400">
+  <img src="./media/pulse_close_up.jpg" alt="Pulse Fitness Tracker Front View" width="400">
 
 - **Back View**  
   <img src="./media/pulse_back.png" alt="Pulse Fitness Tracker Back View" width="400">
 
 - **Side View & Sensor**  
   <img src="./media/pulse_side.png" alt="Pulse Fitness Tracker Side View" width="400">
+
+  - **Wrist Band View**  
+  <img src="./media/pulse_front.jpg" alt="Pulse Fitness Tracker Front View" width="400">
 
 ## Demo Video
 
@@ -124,11 +127,15 @@ The **Pulse Fitness Tracker** is inspired by commercial fitness wearables (e.g.,
 ## 5. Enclosure and PCB
 
 ### 5.1 Enclosure
+
 - **3D-printed PLA** with ~35% honeycomb infill for shock absorption.
 - Ports sealed with custom-printed plugs; coated with silicone spray for moisture resistance.
 - Oversized enclosure due to modular components; can be worn on wrist or upper arm.
 
 ### 5.2 PCB
+<img src="./media/ppulse_pcb_front.png" alt="Pulse Fitness Tracker PCB Front" width="400">
+<img src="./media/ppulse_pcb_back.png" alt="Pulse Fitness Tracker PCB Back" width="400">
+
 - **2-layer testing board** used to simplify wiring and debugging.
 - Future iterations aim to integrate sensors and microcontroller on a single, compact PCB.
 
