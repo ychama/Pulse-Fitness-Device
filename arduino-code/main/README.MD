@@ -1,4 +1,4 @@
-# Wearable Fitness Device Project
+# Pulse Fitness Device Project
 
 ## Overview
 
