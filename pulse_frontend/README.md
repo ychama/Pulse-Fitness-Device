@@ -31,10 +31,13 @@ The frontend is designed to interface seamlessly with the Pulse Fitness Tracker 
    - Login and account management with secure authentication.
 
 ### Login Page
-![Login Page](./media/pulse_login_page.png)
+<img src="./media/pulse_login_page.png" alt="Login Page" width="400">
 
 ### Registration Page
-![Registration Page](./media/pulse_registration_page.png)
+<img src="./media/pulse_registration_page.png" alt="Registration Page" width="400">
+
+### Reset Password Page
+<img src="./media/pulse_reset_password.png" alt="Reset Password Page" width="400">
 
 2. **Dashboard**:
    - Displays fitness metrics, including:
@@ -43,16 +46,17 @@ The frontend is designed to interface seamlessly with the Pulse Fitness Tracker 
      - Step count (graphed over time)
 
 ### Main Dashboard
-![Dashboard](./media/pulse_dashboard.png)
+<img src="./media/pulse_dashboard.png" alt="Main Dashboard" width="400">
 
 ### Dashboard Plot
-![Dashboard](./media/pulse_main_dashboard_plot.png)
+<img src="./media/pulse_main_dashboard_plot.png" alt="Dashboard Plot" width="400">
 
 ### Heart Rate Plot
-![Dashboard](./media/pulse_heart_rate_plot.png)
+<img src="./media/pulse_heart_rate_plot.png" alt="Heart Rate Plot" width="400">
 
 ### Blood Oxygen Plot
-![Dashboard](./media/pulse_blood_oxygen_plot.png)
+<img src="./media/pulse_blood_oxygen_plot.png" alt="Blood Oxygen Plot" width="400">
+
 
 3. **Device Pairing**:
    - Connect to the Pulse Fitness Tracker via Bluetooth.
