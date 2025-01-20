@@ -38,27 +38,28 @@ The **Pulse Fitness Tracker** is inspired by commercial fitness wearables (e.g.,
 ### Product Images
 
 - **Front View**  
-  ![Pulse Fitness Tracker Front View](./media/pulse_front.png)
+  <img src="./media/pulse_front.png" alt="Pulse Fitness Tracker Front View" width="400">
 
 - **Back View**  
-  ![Pulse Fitness Tracker Back View](./media/pulse_back.png)
+  <img src="./media/pulse_back.png" alt="Pulse Fitness Tracker Back View" width="400">
 
 - **Side View & Sensor**  
-  ![Pulse Fitness Tracker Side View](./media/pulse_side.png)
+  <img src="./media/pulse_side.png" alt="Pulse Fitness Tracker Side View" width="400">
 
-### Demo Video
+## Demo Video
 
-- **Pulse Watch Demo**
-   <video src="./media/pulse_watch_demo.mp4" controls width="800"></video>
+- **Pulse Watch Demo**  
+  [Watch Demo Video](./media/pulse_watch_demo.mp4)
 
-- **Pulse Web Demo**
-   <video src="./media/pulse_web_demo.mp4" controls width="800"></video>
+- **Pulse Web Demo**  
+  [Watch Demo Video](./media/pulse_web_demo.mp4)
 
 
 ---
 
 ## 3. Hardware Design
-![Pulse Fitness Tracker Front View](./media/pulse_hardware_design.png)
+
+<img src="./media/pulse_hardware_design.png" alt="Pulse Fitness Tracker Hardware Diagram" width="400">
 
 
 ### 3.1 Arduino Nano 33 BLE Sense
@@ -98,7 +99,8 @@ The **Pulse Fitness Tracker** is inspired by commercial fitness wearables (e.g.,
 
 ### 4.1 Frontend (React + Material-UI)
 
-![Pulse Fitness Tracker Software Diagram](./images/pulse_software_diagram.png)
+<img src="./images/pulse_software_diagram.png" alt="Pulse Fitness Tracker Software Diagram" width="400">
+
 
 - Built with **ReactJS** for modular, reusable UI components.
 - **Material-UI** provides a clean, responsive look.
