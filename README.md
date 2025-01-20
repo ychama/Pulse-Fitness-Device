@@ -47,7 +47,7 @@ The **Pulse Fitness Tracker** is inspired by commercial fitness wearables (e.g.,
   <img src="./media/pulse_side.png" alt="Pulse Fitness Tracker Side View" width="400">
 
   - **Wrist Band View**  
-  <img src="./media/pulse_front.jpg" alt="Pulse Fitness Tracker Front View" width="400">
+  <img src="./media/pulse_front.png" alt="Pulse Fitness Tracker Front View" width="400">
 
 ## Demo Video
 
@@ -102,7 +102,7 @@ The **Pulse Fitness Tracker** is inspired by commercial fitness wearables (e.g.,
 
 ### 4.1 Frontend (React + Material-UI)
 
-<img src="./images/pulse_software_diagram.png" alt="Pulse Fitness Tracker Software Diagram" width="400">
+<img src="./media/pulse_software_diagram.png" alt="Pulse Fitness Tracker Software Diagram" width="400">
 
 
 - Built with **ReactJS** for modular, reusable UI components.
@@ -133,8 +133,8 @@ The **Pulse Fitness Tracker** is inspired by commercial fitness wearables (e.g.,
 - Oversized enclosure due to modular components; can be worn on wrist or upper arm.
 
 ### 5.2 PCB
-<img src="./media/ppulse_pcb_front.png" alt="Pulse Fitness Tracker PCB Front" width="400">
-<img src="./media/ppulse_pcb_back.png" alt="Pulse Fitness Tracker PCB Back" width="400">
+<img src="./media/pulse_pcb_front.png" alt="Pulse Fitness Tracker PCB Front" width="400">
+<img src="./media/pulse_pcb_back.png" alt="Pulse Fitness Tracker PCB Back" width="400">
 
 - **2-layer testing board** used to simplify wiring and debugging.
 - Future iterations aim to integrate sensors and microcontroller on a single, compact PCB.
