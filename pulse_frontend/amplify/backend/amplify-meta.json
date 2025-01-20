@@ -1,0 +1,61 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pulse-devpulse-185126-authRole",
+      "UnauthRoleArn": "arn:aws:iam::224720853293:role/amplify-pulse-devpulse-185126-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::224720853293:role/amplify-pulse-devpulse-185126-authRole",
+      "Region": "ca-central-1",
+      "DeploymentBucketName": "amplify-pulse-devpulse-185126-deployment",
+      "UnauthRoleName": "amplify-pulse-devpulse-185126-unauthRole",
+      "StackName": "amplify-pulse-devpulse-185126",
+      "StackId": "arn:aws:cloudformation:ca-central-1:224720853293:stack/amplify-pulse-devpulse-185126/4e0b2050-789e-11eb-a0b5-063e191aa824",
+      "AmplifyAppId": "dj8wdblano9nm"
+    }
+  },
+  "auth": {
+    "pulseb84e760ab84e760a": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "output": {
+        "UserPoolId": "ca-central-1_7njZVBXOB",
+        "AppClientIDWeb": "1r85ovjh58cs2pufepcgdhku6j",
+        "AppClientID": "7qm3lhusdl1l00kkh1112i40dg",
+        "UserPoolName": "pulseb84e760a_userpool_b84e760a"
+      },
+      "lastPushTimeStamp": "2021-04-11T01:08:35.922Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-pulse-devpulse-185126-deployment/amplify-cfn-templates/auth/pulseb84e760ab84e760a-cloudformation-template.yml",
+        "logicalId": "authpulseb84e760ab84e760a"
+      }
+    }
+  },
+  "api": {
+    "pulse": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 365,
+              "description": "API Key"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        },
+        "GraphQLAPIIdOutput": "addjxqqvtzgdde5664m4tku2ca",
+        "GraphQLAPIEndpointOutput": "https://yt3p74oghjde5dgi3ufsn7fksi.appsync-api.ca-central-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-wlkmktsql5fe3ms46dknf5qsgi"
+      },
+      "lastPushTimeStamp": "2021-04-11T01:08:37.767Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-pulse-devpulse-185126-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apipulse"
+      },
+      "lastPushDirHash": "II769W7Aym/uHBcQpFXjD8iFXws="
+    }
+  }
+}

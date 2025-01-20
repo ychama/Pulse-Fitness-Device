@@ -1,0 +1,62 @@
+.rbc-event.rbc-selected {
+  background-color: #265985 !important;}
+.rbc-time-view{
+  height: 85vh;
+  overflow: auto;
+}
+.rbc-calendar {
+  height: 100%;
+  flex-grow: 1;
+}
+
+.rbc-header {
+  padding: 12px 16px !important;
+
+  a {
+    padding-bottom: 8px !important;
+  }
+
+  span {
+    font-size: 15px !important;
+    font-weight: 500;
+  }
+}
+
+.calendar-header {
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+.ant-picker-cell {
+  color: rgba(0, 0, 0, .25) !important;
+  cursor: not-allowed !important;
+}
+
+.ant-picker-cell-in-view {
+  color: rgba(0, 0, 0, .85) !important;
+  cursor: pointer !important;
+}
+
+.content {
+  ul {
+    margin-left: 0 !important;
+  }
+}
+
+.MuiPickersBasePicker-container {
+  button span {
+    h4 {
+      color: #fff !important;
+    }
+    h2{
+      color: #fff !important;
+    }
+    h6 {
+      color: #fff !important;
+    }
+  }
+}
+
+.MuiDialog-container.MuiDialog-scrollPaper {
+  background-color: rgba(0, 0, 0, 0.5);
+}

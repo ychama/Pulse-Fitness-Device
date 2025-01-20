@@ -1,0 +1,54 @@
+type User
+  @model
+  @key(name: "userByEmail", fields: ["email"], queryField: "userByEmail") {
+  id: ID!
+  email: String!
+  first_name: String!
+  last_name: String!
+  DOB: AWSDate!
+  pic: String
+  sex: Sex!
+  height: Float!
+  analytics: [Analytics] @connection(keyName: "byUser", fields: ["id"])
+}
+
+enum Sex {
+  MALE
+  FEMALE
+}
+
+type Analytics @model @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  userID: ID!
+  date_recorded: AWSDateTime!
+  stepCountID: ID!
+  heartRateID: ID!
+  bloodOxygenID: ID!
+  stepCount: StepCount! @connection(fields: ["stepCountID"])
+  heartRate: HeartRate! @connection(fields: ["heartRateID"])
+  bloodOxygen: BloodOxygen! @connection(fields: ["bloodOxygenID"])
+}
+
+type StepCount @model {
+  id: ID!
+  step_count: String!
+  metrics: AnalyicsStatus!
+}
+
+type HeartRate @model {
+  id: ID!
+  heart_rate: String!
+  metrics: AnalyicsStatus!
+}
+
+type BloodOxygen @model {
+  id: ID!
+  blood_oxygen: String!
+  metrics: AnalyicsStatus!
+}
+
+enum AnalyicsStatus {
+  NORMAL
+  HIGH
+  SEVERE
+}
