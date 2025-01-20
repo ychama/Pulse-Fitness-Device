@@ -1,70 +1,215 @@
-# Getting Started with Create React App
+# Pulse Fitness Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the **Pulse Fitness Tracker** repository. This project is a wearable prototype that monitors heart rate, blood-oxygen levels, step count, and time of day, with integrated data logging and an interactive user interface.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+1. [Project Overview](#project-overview)  
+2. [Product Images & Demo](#product-images--demo)  
+3. [Hardware Design](#hardware-design)  
+4. [Software Architecture](#software-architecture)  
+5. [Enclosure and PCB](#enclosure-and-pcb)  
+6. [Regulatory Considerations](#regulatory-considerations)  
+7. [Design Alternatives](#design-alternatives)  
+8. [Deployment](#deployment)  
+9. [Future Work](#future-work)  
+10. [References](#references)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 1. Project Overview
 
-### `npm test`
+The **Pulse Fitness Tracker** is inspired by commercial fitness wearables (e.g., Apple Watch, Fitbit). Our objective was to create a low-cost, Arduino-based, open-source device with the following features:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Heart Rate & Blood-Oxygen Monitoring** using the SparkFun SEN-15219 sensor.
+- **Step Tracking** using the onboard accelerometer/gyroscope of the Arduino Nano 33 BLE Sense.
+- **Data Logging** via an SD card module for offline data storage.
+- **Bluetooth Connectivity** to sync data with a React-based web application.
+- **OLED Display & Rotary Encoder** for intuitive menu navigation and user interaction.
+- **3D-Printed Enclosure** to house components, provide impact resistance, and partial water-resistance.
+- **AWS Amplify Hosting** for easy web application deployment.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 2. Product Images & Demo
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Product Images
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Front View**  
+  ![Pulse Fitness Tracker Front View](./media/pulse_front.png)
 
-### `npm run eject`
+- **Back View**  
+  ![Pulse Fitness Tracker Back View](./media/pulse_back.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **Side View & Sensor**  
+  ![Pulse Fitness Tracker Side View](./media/pulse_side.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Demo Video
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- **Pulse Watch Demo**
+   <video src="./media/pulse_watch_demo.mp4" controls width="800"></video>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **Pulse Web Demo**
+   <video src="./media/pulse_web_demo.mp4" controls width="800"></video>
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 3. Hardware Design
+![Pulse Fitness Tracker Front View](./media/pulse_hardware_design.png)
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 3.1 Arduino Nano 33 BLE Sense
+- **nRF52840 ARM-based microcontroller** with onboard Bluetooth, accelerometer, and gyroscope.
+- Operates at **3.3V logic**, powering all other modules.
+- Responsible for sensor data acquisition, BLE communication, and menu logic.
 
-### Analyzing the Bundle Size
+### 3.2 Power Supply
+- **400 mAh LiPo Battery** connected to an **Adafruit PowerBoost 500c** for regulated 5V output.
+- Charges via mini-USB without interrupting device operation.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 3.3 Heart Rate & Oximetry Sensor
+- **SparkFun SEN-15219** using Maxim Integrated’s MAX30101 (optical sensor) + MAX32664 (algorithmic hub).
+- Communicates via **I2C** and outputs heart rate plus SpO2 readings in real time.
 
-### Making a Progressive Web App
+### 3.4 SD Card Storage
+- **Adafruit 254 MicroSD Breakout** (SPI interface).
+- Logs time-stamped sensor data for offline analysis.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 3.5 OLED Display
+- **1.3" monochrome OLED** (Adafruit 938).
+- High contrast, low power usage, and **I2C** interface.
 
-### Advanced Configuration
+### 3.6 Rotary Encoder
+- Primary input device for scrolling and selection (push-button).
+- Used to toggle Bluetooth, start/stop data logging, and navigate menus.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 4. Software Architecture
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
+[ React Frontend ] <---> [ AWS GraphQL + DynamoDB ] <---> [ Arduino Device ]
+       ^                                          ^
+       |-------------- BLE ------------------------|
+```
 
-### `npm run build` fails to minify
+### 4.1 Frontend (React + Material-UI)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Pulse Fitness Tracker Software Diagram](./images/pulse_software_diagram.png)
+
+- Built with **ReactJS** for modular, reusable UI components.
+- **Material-UI** provides a clean, responsive look.
+- **MVC-like Pattern**:
+  - **View:** Manages UI rendering (login, dashboard, charts, device pairing).
+  - **Controller:** Handles user actions, routes data requests, manages BLE connectivity.
+  - **Model:** Stores session info (user/device data) to minimize backend queries.
+
+### 4.2 Backend (AWS GraphQL + DynamoDB)
+- **AWS Amplify** integrates a GraphQL API for the web app.
+- **DynamoDB** for NoSQL data storage of user info, sensor data, and analytics.
+- **AWS Cognito** handles secure user authentication (signup/login).
+
+### 4.3 Arduino Firmware
+- Written in C++ for **Arduino Nano 33 BLE Sense**.
+- Initializes sensors, reads/validates HR & SpO2 data, implements step-counting algorithms.
+- Logs reliable data to the SD card; exposes BLE services for the web app.
+
+---
+
+## 5. Enclosure and PCB
+
+### 5.1 Enclosure
+- **3D-printed PLA** with ~35% honeycomb infill for shock absorption.
+- Ports sealed with custom-printed plugs; coated with silicone spray for moisture resistance.
+- Oversized enclosure due to modular components; can be worn on wrist or upper arm.
+
+### 5.2 PCB
+- **2-layer testing board** used to simplify wiring and debugging.
+- Future iterations aim to integrate sensors and microcontroller on a single, compact PCB.
+
+---
+
+## 6. Regulatory Considerations
+
+- **CCPSA (Canada Consumer Product Safety Act)**: Ensures proper labeling and safe manufacturing.
+- **PIPEDA (Privacy)**: Protects user data from unauthorized access or distribution.
+- **ISED**: Approvals required for electronic devices in Canadian markets.
+- **ISO 10377**: Guidelines for product safety and risk management.
+- **ISO/IEC JTC 1/SC 25**: Standardizing microprocessor interfaces and protocols.
+
+---
+
+## 7. Design Alternatives
+
+1. **Board Choice**  
+   - Considered Raspberry Pi vs. Arduino; chose Arduino Nano 33 BLE Sense for size, BLE integration, and low power.
+
+2. **Display Technology**  
+   - Chose **OLED** over LCD for better contrast and lower power consumption.
+
+3. **Input Device**  
+   - Selected rotary encoder over simple pushbuttons for intuitive scrolling + selection.
+
+4. **Database**  
+   - Opted for **NoSQL (DynamoDB)** since we only needed fast reads/writes and simple data structures.
+
+---
+
+## 8. Deployment
+
+
+### Local Development
+1. **Clone** the repository:
+
+2. **Install dependencies** (frontend example):
+   ```bash
+   cd Pulse-Fitness-Tracker/pulse_frontend
+   npm install
+   # or
+   yarn install
+   ```
+3. **Run the dev server**:
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
+4. Visit `http://localhost:3000` to view in your browser.
+
+
+---
+
+## 9. Future Work
+
+1. **Miniaturization**  
+   - Develop a custom PCB integrating microcontroller, power, and sensors on a single board.
+
+2. **Enhanced Wearable Features**  
+   - Activity recognition for rest/walk/run, calorie estimation, alarms.
+
+3. **Social Integration**  
+   - Allow user-to-user comparisons and challenges through the web or watch UI.
+
+4. **Extended Rotary Encoder Menus**  
+   - Access workout history, notifications, daily goals, etc.
+
+5. **Battery Optimization**  
+   - Improve sleep modes, sensor polling intervals, and data batching to reduce power draw.
+
+---
+
+## 10. References
+
+1. [SparkFun SEN-15219 Documentation](https://www.sparkfun.com/products/15219)  
+2. [Adafruit PowerBoost 500c](https://www.adafruit.com/product/1944)  
+3. [Arduino Nano 33 BLE Sense Docs](https://docs.arduino.cc/)  
+4. [AWS Amplify & DynamoDB](https://aws.amazon.com/)  
+5. [Adafruit 254 MicroSD Breakout](https://www.adafruit.com/product/254)
+
+---
+
+**Thank you for exploring the Pulse Fitness Tracker!**
+For feedback, questions, or contributions, open an issue or submit a pull request. We welcome any ideas that help us move closer to a production-ready, miniaturized wearable device.
