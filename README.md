@@ -51,11 +51,11 @@ The **Pulse Fitness Tracker** is inspired by commercial fitness wearables (e.g.,
 
 ## Demo Video
 
-- **Pulse Watch Demo**  
-  [Watch Demo Video](./media/pulse_watch_demo.mp4)
+### Pulse Watch Demo  
+[![Pulse Watch Demo](https://img.youtube.com/vi/ixJnuQEW2lc/0.jpg)](https://youtube.com/shorts/ixJnuQEW2lc)
 
-- **Pulse Web Demo**  
-  [Watch Demo Video](./media/pulse_web_demo.mp4)
+### Pulse Web Demo  
+[![Pulse Web Demo](https://img.youtube.com/vi/EQgliysIxx8/0.jpg)](https://youtu.be/EQgliysIxx8)
 
 
 ---
